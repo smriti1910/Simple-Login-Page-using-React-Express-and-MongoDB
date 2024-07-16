@@ -19,9 +19,9 @@ function SignUp() {
             .then(response => {
                 console.log(response.data);
                 if (response.data.message) {
-                    alert(response.data.message);
-                } else {
                     alert('Registration Failed');
+                } else {
+                    alert(response.data.message);
                 }
             })
             .catch(error => {

@@ -14,11 +14,11 @@ const authenticateUser = async(request, response) => {
         const expectedUser = await userModel.findOne({email : newEmail});
         if(!expectedUser)
         {
-            return response.status(200).json({message: 'User not found'})
+            return response.status(400).json({message: 'User not found'})
         }
         if(newPwd != expectedUser.password)
         {
-            return response.status(200).json({message: 'Invalid Password'});
+            return response.status(404).json({message: 'Invalid Password'});
         }
         return response.status(200).json({message : `Authentication Successful`, user : expectedUser})
     }

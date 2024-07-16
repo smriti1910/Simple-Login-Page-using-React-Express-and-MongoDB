@@ -18,7 +18,11 @@ function Login() {
         axios.get(`http://localhost:3500/login/${emailValue}/${passwordValue}`)
         .then(response => {
             console.log(response.data);
-            alert(response.data.message);
+            if (response.data.message) {
+                alert(response.data.message);
+            } else {
+                alert(response.data.message);
+            }
         })
         .catch(error => {
             console.error('There was an error logging in:', error);

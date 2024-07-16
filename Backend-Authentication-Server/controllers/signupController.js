@@ -13,7 +13,7 @@ const addNewUser = async(request, response) => {
         const existingUser = await userModel.findOne({email: newUser.email})
         if(existingUser)
         {
-            return response.status(200).json({message: `A user with ${newUser.email} already exists`})
+            return response.status(409).json({message: `A user with ${newUser.email} already exists`})
         }
         const insertedUser = await userModel.create(newUser)
         response.status(201).json({message : 'Registration Successful', user : insertedUser})
