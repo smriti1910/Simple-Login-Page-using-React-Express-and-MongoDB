@@ -21,11 +21,19 @@ function SignUp() {
                 if (response.data.message) {
                     alert('Registration Failed');
                 } else {
-                    alert(response.data.message);
+                    alert(`Unexpected status code: ${response.status}`);
                 }
             })
             .catch(error => {
-                console.error('There was an error registering:', error);
+                if (error.response) {
+                    alert(`${error.response.data.message}`);
+                } else if (error.request) {
+                    console.error('Error: No response received from server', error.request);
+                    alert('Error: No response received from server');
+                } else {
+                    console.error('Error:', error.message);
+                    alert(`Error: ${error.message}`);
+                }
             });
     }
 

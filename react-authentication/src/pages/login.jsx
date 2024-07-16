@@ -18,14 +18,22 @@ function Login() {
         axios.get(`http://localhost:3500/login/${emailValue}/${passwordValue}`)
         .then(response => {
             console.log(response.data);
-            if (response.data.message) {
+            if (response.status === 200) {
                 alert(response.data.message);
             } else {
-                alert(response.data.message);
+                alert(`Unexpected status code: ${response.status}`);
             }
         })
         .catch(error => {
-            console.error('There was an error logging in:', error);
+            if (error.response) {
+                alert(`${error.response.data.message}`);
+            } else if (error.request) {
+                console.error('Error: No response received from server', error.request);
+                alert('Error: No response received from server');
+            } else {
+                console.error('Error:', error.message);
+                alert(`Error: ${error.message}`);
+            }
         });
     }
 
